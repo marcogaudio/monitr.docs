@@ -1,0 +1,38 @@
+url: https://github.com/marcogaudio/monitr
+
+reference:
+  - title: Main functions
+    desc: The core components of the package. Functions to compute optimal exposure, expected claims and IBNR claims.
+    contents:
+      - optimize_exposure
+      - compute_expectedclaim
+      - calculate_IBNR
+      - duplicate_portfolio
+      - expand_portfolio
+  - title: Datasets
+    desc: The datasets of simulated life policies embedded in the package.
+    contents:
+      - lifepolicies
+      - raw_lifepolicies
+      - onerow_lifepolicies
+      - SI2006
+      - IBNR_factors_CQP
+  - title: Other functions
+    desc: Functions used to perform some checks by the core functions.
+    contents:
+      - check_date
+      - check_events_col
+
+
+
+navbar:
+  title: ~
+  type: default
+  left:
+    - text: Functions and data
+      href: reference/index.html
+    - text: Vignette
+      href: reference/index.html
+      menu:
+      - text: Introduction to monitr
+        href: articles/optimize_exposure.html
