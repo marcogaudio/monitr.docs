@@ -1,4 +1,4 @@
-url: https://github.com/marcogaudio/monitr
+url: https://marcogaudio.github.io/monitr.docs/
 
 reference:
   - title: Main functions
@@ -23,8 +23,6 @@ reference:
       - check_date
       - check_events_col
 
-
-
 navbar:
   title: ~
   type: default
@@ -32,7 +30,9 @@ navbar:
     - text: Functions and data
       href: reference/index.html
     - text: Vignette
-      href: reference/index.html
+      href: articles/monitr.html
       menu:
       - text: Introduction to monitr
-        href: articles/optimize_exposure.html
+        href: articles/monitr.html
+
+

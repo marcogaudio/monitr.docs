@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/marcogaudio/monitr/index.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//index.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/calculate_IBNR.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/calculate_IBNR.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/check_date.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/check_date.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/check_events_col.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/check_events_col.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/compute_expectedclaim.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/compute_expectedclaim.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/duplicate_portfolio.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/duplicate_portfolio.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/expand_portfolio.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/expand_portfolio.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/IBNR_factors_CQP.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/IBNR_factors_CQP.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/lifepolicies.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/lifepolicies.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/onerow_lifepolicies.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/onerow_lifepolicies.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/optimize_exposure.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/optimize_exposure.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/pipe.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/raw_lifepolicies.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/raw_lifepolicies.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/reference/SI2006.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//reference/SI2006.html</loc>
   </url>
   <url>
-    <loc>https://github.com/marcogaudio/monitr/articles/monitr.html</loc>
+    <loc>https://marcogaudio.github.io/monitr.docs//articles/monitr.html</loc>
   </url>
 </urlset>
