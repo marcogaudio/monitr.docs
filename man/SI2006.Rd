@@ -3,7 +3,7 @@
 \docType{data}
 \name{SI2006}
 \alias{SI2006}
-\title{Sample Mortality table (2006).}
+\title{Sample Mortality table (2006)}
 \format{
 A data frame with variables:
 \describe{

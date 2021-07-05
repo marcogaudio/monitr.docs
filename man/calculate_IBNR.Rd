@@ -9,7 +9,7 @@ calculate_IBNR(.data, .ibnrtable, .ibnrfactor, .cy)
 \arguments{
 \item{.data}{A data frame coming out from the function \code{optimize_exposure()}, or of the same type.}
 
-\item{.ibnrtable}{A table with two columns, of the for IBNR factors and one for the associated calendar
+\item{.ibnrtable}{A table with two columns, one for the IBNR factors and one for the associated calendar
 year.}
 
 \item{.ibnrfactor}{the column of .ibnrtable with the IBNR factors.}
@@ -36,10 +36,10 @@ data(lifepolicies)
 
 lifepolicies \%>\%
   optimize_exposure(
-    .polnr = Policy_id, .inceptiondate = Inception_date,
-    .termdate = Term_date, .claimdate = Claim_date,
-    .lapsedate = Lapse_date, .birthdate = Birth_date,
-    .gender = Gender
+  .polnr = Policy_id, .inceptiondate = Inception_date,
+  .termdate = Term_date, .mainevent = Claim , .mainevent_date = Claim_date,
+  .subevent = Lapse, .subevent_date = Lapse_date, .birthdate = Birth_date,
+  .gender = Gender, .waitingperiod = Waiting_period
   ) \%>\%
   compute_expectedclaim(
     .table = SI2006, .age = AGE,

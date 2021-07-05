@@ -39,10 +39,10 @@ data(lifepolicies)
 
 lifepolicies \%>\%
   optimize_exposure(
-    .polnr = Policy_id, .inceptiondate = Inception_date,
-    .termdate = Term_date, .claimdate = Claim_date,
-    .lapsedate = Lapse_date, .birthdate = Birth_date,
-    .gender = Gender
+  .polnr = Policy_id, .inceptiondate = Inception_date,
+  .termdate = Term_date, .mainevent = Claim , .mainevent_date = Claim_date,
+  .subevent = Lapse, .subevent_date = Lapse_date, .birthdate = Birth_date,
+  .gender = Gender, .waitingperiod = Waiting_period
   ) \%>\%
   compute_expectedclaim(
     .table = SI2006, .age = AGE,

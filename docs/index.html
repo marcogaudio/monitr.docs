@@ -91,14 +91,16 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <p>An optimal usage of the functions provided is the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/marcogaudio/monitr">monitr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://marcogaudio.github.io/monitr.docs/">monitr</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">lifepolicies</span><span class="op">)</span>
 
 <span class="va">lifepolicies</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/optimize_exposure.html">optimize_exposure</a></span><span class="op">(</span>.polnr <span class="op">=</span> <span class="va">Policy_id</span>, .inceptiondate <span class="op">=</span> <span class="va">Inception_date</span>,
-                    .termdate <span class="op">=</span> <span class="va">Term_date</span>, .claimdate <span class="op">=</span> <span class="va">Claim_date</span>,
-                    .lapsedate <span class="op">=</span> <span class="va">Lapse_date</span>, .birthdate <span class="op">=</span> <span class="va">Birth_date</span>,
-                    .gender <span class="op">=</span> <span class="va">Gender</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/optimize_exposure.html">optimize_exposure</a></span><span class="op">(</span>
+  .polnr <span class="op">=</span> <span class="va">Policy_id</span>, .inceptiondate <span class="op">=</span> <span class="va">Inception_date</span>,
+  .termdate <span class="op">=</span> <span class="va">Term_date</span>, .mainevent <span class="op">=</span> <span class="va">Claim</span> , .mainevent_date <span class="op">=</span> <span class="va">Claim_date</span>,
+  .subevent <span class="op">=</span> <span class="va">Lapse</span>, .subevent_date <span class="op">=</span> <span class="va">Lapse_date</span>, .birthdate <span class="op">=</span> <span class="va">Birth_date</span>,
+  .gender <span class="op">=</span> <span class="va">Gender</span>, .waitingperiod <span class="op">=</span> <span class="va">Waiting_period</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/compute_expectedclaim.html">compute_expectedclaim</a></span><span class="op">(</span>.table <span class="op">=</span> <span class="va">SI2006</span>, .age <span class="op">=</span> <span class="va">AGE</span>,
                         .gender <span class="op">=</span> <span class="va">GENDER</span>, .qx <span class="op">=</span> <span class="va">qx</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/calculate_IBNR.html">calculate_IBNR</a></span><span class="op">(</span>.ibnrtable <span class="op">=</span> <span class="va">IBNR_factors_CQP</span>,

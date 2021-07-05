@@ -9,10 +9,13 @@ optimize_exposure(
   .polnr,
   .inceptiondate,
   .termdate,
-  .claimdate,
-  .lapsedate,
+  .mainevent,
+  .mainevent_date,
+  .subevent,
+  .subevent_date,
   .birthdate,
-  .gender
+  .gender,
+  .waitingperiod = 0
 )
 }
 \arguments{
@@ -26,13 +29,21 @@ way the exposure in each calendar year for each age of the policyholder.}
 
 \item{.termdate}{A column of .data with the expiry date of the policies.}
 
-\item{.claimdate}{A column of .data with the date of the claim, if any, otherwise 2099-12-31.}
+\item{.mainevent}{A column of .data with 1 if the main event (the one for which perform the monitoring) occurred, 0 otherwise.}
 
-\item{.lapsedate}{A column of .data with the date of the lapse, if any, otherwise 2099-12-31.}
+\item{.mainevent_date}{A column of .data with the date of the event (claim or lapse) for which the monitoring has to be performed.
+For policy  with no claim/lapse the date should be 2099-12-31.}
+
+\item{.subevent}{A column of .data with 1 if the sub event (the one for which do not perform the monitoring) occurred, 0 otherwise.}
+
+\item{.subevent_date}{A column of .data with the date of the subordinate event (claim or lapse). In this case, for this event the monitoring
+is not performed. For policies with no claim/lapse the date should be 2099-12-31.}
 
 \item{.birthdate}{A column of .data with the birthday of the policyholders.}
 
 \item{.gender}{A column of .data with the gender of the policyholders.}
+
+\item{.waitingperiod}{A column with the waiting period (in months) for the policy.}
 }
 \value{
 The modified data frame with some new columns, in particular:
@@ -53,9 +64,7 @@ in the valuation period;
 \item \code{EXPOSURE_YEAR_AGE1} is the exposure of the policyholder in the current year when he/she has \code{AGE1},
 (it is computed as number days exposed with age1 / total number of days in the current year);
 \item \code{EXPOSURE_IN_YEAR} is the total exposure in the valuation period, the sum of the previous two exposures,
-it is 1 by definition when a claim occurs;
-\item \code{EXPOSURE_IN_YEAR_lapse} is the total exposure in the valuation period, the sum of the previous two exposures,
-it is 1 by definition when a policy lapses.
+it is 1 by definition when a main event (claim/lapse) occurs.
 }
 
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -64,16 +73,16 @@ it is 1 by definition when a policy lapses.
 The idea behind this function is to compute in an optimal way the exposure period
 for each policyhoder and for each year in which the contract is in force, by distinguishing
 each calendar year in before and after his/her birthday. Doing so, for a given policyholder
-and for each year we get the exposure he/she is exposed with age x and the exposire he/she
+and for each year we get the exposure he/she is exposed with age x and the exposure he/she
 is exposed at age x+1.
 }
 \examples{
 data(lifepolicies)
 lifepolicies \%>\%
   optimize_exposure(
-    .polnr = Policy_id, .inceptiondate = Inception_date,
-    .termdate = Term_date, .claimdate = Claim_date,
-    .lapsedate = Lapse_date, .birthdate = Birth_date,
-    .gender = Gender
+  .polnr = Policy_id, .inceptiondate = Inception_date,
+  .termdate = Term_date, .mainevent = Claim , .mainevent_date = Claim_date,
+  .subevent = Lapse, .subevent_date = Lapse_date, .birthdate = Birth_date,
+  .gender = Gender, .waitingperiod = Waiting_period
   )
 }

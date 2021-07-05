@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   monitr: monitr.html
-last_built: 2021-05-22T10:49Z
+last_built: 2021-07-05T15:53Z
 urls:
   reference: https://marcogaudio.github.io/monitr.docs//reference
   article: https://marcogaudio.github.io/monitr.docs//articles

@@ -43,7 +43,7 @@
 <meta property="og:description" content="The idea behind this function is to compute in an optimal way the exposure period
 for each policyhoder and for each year in which the contract is in force, by distinguishing
 each calendar year in before and after his/her birthday. Doing so, for a given policyholder
-and for each year we get the exposure he/she is exposed with age x and the exposire he/she
+and for each year we get the exposure he/she is exposed with age x and the exposure he/she
 is exposed at age x+1." />
 
 
@@ -127,7 +127,7 @@ is exposed at age x+1." />
     <p>The idea behind this function is to compute in an optimal way the exposure period
 for each policyhoder and for each year in which the contract is in force, by distinguishing
 each calendar year in before and after his/her birthday. Doing so, for a given policyholder
-and for each year we get the exposure he/she is exposed with age x and the exposire he/she
+and for each year we get the exposure he/she is exposed with age x and the exposure he/she
 is exposed at age x+1.</p>
     </div>
 
@@ -182,7 +182,7 @@ For policy  with no claim/lapse the date should be 2099-12-31.</p></td>
     <tr>
       <th>.subevent_date</th>
       <td><p>A column of .data with the date of the subordinate event (claim or lapse). In this case, for this event the monitoring
-is not performed. For policy  with no claim/lapse the date should be 2099-12-31.</p></td>
+is not performed. For policies with no claim/lapse the date should be 2099-12-31.</p></td>
     </tr>
     <tr>
       <th>.birthdate</th>
@@ -217,7 +217,7 @@ in the valuation period;</p></li>
 <li><p><code>EXPOSURE_YEAR_AGE1</code> is the exposure of the policyholder in the current year when he/she has <code>AGE1</code>,
 (it is computed as number days exposed with age1 / total number of days in the current year);</p></li>
 <li><p><code>EXPOSURE_IN_YEAR</code> is the total exposure in the valuation period, the sum of the previous two exposures,
-it is 1 by definition when a main event (claim/lapse) occurs;</p></li>
+it is 1 by definition when a main event (claim/lapse) occurs.</p></li>
 </ul>
 
 <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
@@ -231,7 +231,7 @@ it is 1 by definition when a main event (claim/lapse) occurs;</p></li>
   .subevent <span class='op'>=</span> <span class='va'>Lapse</span>, .subevent_date <span class='op'>=</span> <span class='va'>Lapse_date</span>, .birthdate <span class='op'>=</span> <span class='va'>Birth_date</span>,
   .gender <span class='op'>=</span> <span class='va'>Gender</span>, .waitingperiod <span class='op'>=</span> <span class='va'>Waiting_period</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 28,514 x 21</span><span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: There are policies which main event occurs in the waiting period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689, 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494, 9169837, 9409256)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are policies which sub event occurs in the waiting period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789, 6572333, 6793280, 7869755, 7950721, 9603585)</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 28,514 x 21</span><span>
 #&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY
 #&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   1</span><span style='text-decoration: underline;'>019</span><span>640 2012-11-01     2016-11-01 1945-03-10 F       </span><span style='text-decoration: underline;'>2</span><span>012  </span><span style='text-decoration: underline;'>2</span><span>012

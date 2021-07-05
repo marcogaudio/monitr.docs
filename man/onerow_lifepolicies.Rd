@@ -3,12 +3,13 @@
 \docType{data}
 \name{onerow_lifepolicies}
 \alias{onerow_lifepolicies}
-\title{Life policies portfolio (one row for each policy).}
+\title{Life policies portfolio (one row for each policy)}
 \format{
 A data frame with variables:
 \describe{
 \item{Policy_id}{policy number identifier, unique for each policy.}
 \item{Inception_date}{signing date of the contract.}
+\item{Waiting_period}{The period in months, starting from signing, for which the policyholder is not covered.}
 \item{Term_date}{ending date of the contract.}
 \item{Birth_date}{date of birth of the policyolder.}
 \item{Gender}{policyholder's gender.}

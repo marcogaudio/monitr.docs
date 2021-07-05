@@ -2,7 +2,7 @@
 % Please edit documentation in R/expand_portfolio.R
 \name{expand_portfolio}
 \alias{expand_portfolio}
-\title{Expand an insurance portfolio.}
+\title{Expand an insurance portfolio}
 \usage{
 expand_portfolio(
   .data,
@@ -30,7 +30,7 @@ expand_portfolio(
 
 \item{.lapse}{A column of .data with 1 if the policy is lapsed, 0 otherwise.}
 
-\item{.lapsedate}{A column of .data with the date of the lapse, if any, otherwise 2099-12-31.}
+\item{.lapsedate}{A column of .data with the date of the lapse, if any, otherwise 2099-12-31.#' @param .claim A column of .data with 1 if the claim occurred, 0 otherwise.}
 }
 \value{
 A dataset with n x 2 rows for each policy, where n is the number of years the contract is in force.

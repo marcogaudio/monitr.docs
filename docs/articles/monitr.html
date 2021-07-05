@@ -139,7 +139,7 @@
 <li><p><code>UY</code> the underwriting year.</p></li>
 <li><p><code>CY</code> the current year of evaluation.</p></li>
 <li><p><code>Claim_date</code> date when claim occurred, if any, otherwise 2099-12-31.</p></li>
-<li><p><code>Claim</code> 1 if the year of `<code>Claim_date</code> is eqaul to <code>CY</code>, o otherwise.</p></li>
+<li><p><code>Claim</code> 1 if the year of `<code>Claim_date</code> is equal to <code>CY</code>, 0 otherwise.</p></li>
 <li><p><code>Lapse_date</code> date when policy lapsed, if so, otherwise 2099-12-31.</p></li>
 <li><p><code>Lapse</code> 1 if year of <code>Lapse_date</code> is equal to <code>CY</code>, 0 otherwise.</p></li>
 </ul>
@@ -261,9 +261,9 @@
 <li><p><code>.inceptiondate</code> takes on the column’s name of the data frame with the starting date of each contract.</p></li>
 <li><p><code>.termdate</code> requires the column of the data frame with the expiry date of the policies.</p></li>
 <li><p><code>.mainevent</code> A column of .data with 1 if the main event (the one for which perform the monitoring) occurred, 0 otherwise.</p></li>
-<li><p><code>.mainevent_date</code> A column fo <code>.data</code> with the date of the event (claim or lapse) for which the monitoring has to be performed. For policy with no claim/lapse, the date should be 2099-12-31.</p></li>
+<li><p><code>.mainevent_date</code> A column of <code>.data</code> with the date of the event (claim or lapse) for which the monitoring has to be performed. For policy with no claim/lapse, the date should be 2099-12-31.</p></li>
 <li><p><code>subevent</code> A column of .data with 1 if the sub event (the one for which do not perform the monitoring) occurred, 0 otherwise.</p></li>
-<li><p><code>.subevent_date</code> A column of .data with the date of the subordinate event (claim or lapse). In this case, for this event the monitoring is not performed. For policy with no claim/lapse the date should be 2099-12-31.</p></li>
+<li><p><code>.subevent_date</code> A column of .data with the date of the subordinate event (claim or lapse). In this case, for this event the monitoring is not performed. For policies with no claim/lapse the date should be 2099-12-31.</p></li>
 <li><p><code>.birthdate</code> takes on a column of <code>.data</code> with the birthday date of the policyholders.</p></li>
 <li><p><code>.gender</code> requires a column of <code>.data</code> with the gender of the policyholders.</p></li>
 <li><p><code>.waitingperiod</code> is NULL by default. It is required if there is a waiting period starting from the signing of the contract. It takes on a column with the waiting period (in months, usually) for each policy.</p></li>
@@ -276,6 +276,15 @@
   .subevent <span class="op">=</span> <span class="va">Lapse</span>, .subevent_date <span class="op">=</span> <span class="va">Lapse_date</span>, .birthdate <span class="op">=</span> <span class="va">Birth_date</span>,
   .gender <span class="op">=</span> <span class="va">Gender</span>, .waitingperiod <span class="op">=</span> <span class="va">Waiting_period</span>
   <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 21</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -294,7 +303,7 @@
 <span class="co">#&gt; #   inception_valuation_date &lt;date&gt;, end_valuation_date &lt;date&gt;, AGE0 &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   AGE1 &lt;dbl&gt;, DAY_AGE0 &lt;dbl&gt;, DAY_AGE1 &lt;dbl&gt;, EXPOSURE_YEAR_AGE0 &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   EXPOSURE_YEAR_AGE1 &lt;dbl&gt;, EXPOSURE_IN_YEAR &lt;dbl&gt;</span></code></pre></div>
-<p><small> <strong>NOTE</strong>: <em>to see the output of the function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code>, please use the arrow to slide the columns of the resulting dataset.</em> </small></p>
+<p><small> <strong>NOTE</strong>: <em>to see the output of the function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code>, please use the arrow to slide the columns of the resulting dataset. If the arrow is not present, please visualize the vignette using the command <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes("monitr")</a></code></em> </small></p>
 <p>The resulting dataset has a number of new useful columns:</p>
 <ul>
 <li><p><code>inception_valuation_date</code> indicates the date from which to start to compute the exposure, it can be the inception date, the renewal date or the first of January of the current year;</p></li>
@@ -305,7 +314,7 @@
 <li><p><code>DAY_AGE1</code> indicates the days of exposure of the policyholder with AGE1 (after his/her anniversary) in the valuation period;</p></li>
 <li><p><code>EXPOSURE_YEAR_AGE0</code> is the exposure of the policyholder in the current year when he/she has AGE0, (it is computed as number days exposed with age0 / total number of days in the current year);</p></li>
 <li><p><code>EXPOSURE_YEAR_AGE1</code> is the exposure of the policyholder in the current year when he/she has AGE1, (it is computed as number days exposed with age1 / total number of days in the current year);</p></li>
-<li><p><code>EXPOSURE_IN_YEAR</code> is the total exposure in the valuation period, the sum of the previous two exposures, it is 1 by definition when a main event occurs;</p></li>
+<li><p><code>EXPOSURE_IN_YEAR</code> is the total exposure in the valuation period, the sum of the previous two exposures, it is 1 by definition when a main event occurs.</p></li>
 </ul>
 <p>Note that the function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code> gives a warning message in the case in which the main event or the sub event occurs in the waiting period, with attached the list of policy numbers for which this situation happened. It is strongly suggested to filter out these policies given that the function will compute the exposure of them for a period that goes from the end of the waiting period to the end valuation date.</p>
 <p>The function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code> can be used in order to perform the monitoring for both the events: claim or lapse. In the latter case, it is reasonable to stop the analysis at the use of the function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code>, given that the other two functions(<code><a href="../reference/compute_expectedclaim.html">compute_expectedclaim()</a></code> and <code>calculate_IBNR</code>) require the <code>.mainevent</code> to be claim. So, the suggested use of the package when the main event is the lapse is the following:</p>
@@ -317,6 +326,15 @@
   .subevent <span class="op">=</span> <span class="va">Claim</span>, .subevent_date <span class="op">=</span> <span class="va">Claim_date</span>, .birthdate <span class="op">=</span> <span class="va">Birth_date</span>,
   .gender <span class="op">=</span> <span class="va">Gender</span>, .waitingperiod <span class="op">=</span> <span class="va">Waiting_period</span>
   <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 21</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -381,6 +399,15 @@
     .table <span class="op">=</span> <span class="va">SI2006</span>, .age <span class="op">=</span> <span class="va">AGE</span>, .gender <span class="op">=</span> <span class="va">GENDER</span>,
     .qx <span class="op">=</span> <span class="va">qx</span>
     <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 25</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -404,9 +431,9 @@
 <p>The function provides a new data frame as output, with the following columns (in addition to those created by <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code>):</p>
 <ul>
 <li><p><code>qx.x</code> indicates the probability of dying between AGE0 and AGE1 for the policyholder;</p></li>
-<li><p><code>qx.y</code> .y indicates the probaability of dying between AGE1 and AGE1+ 1 for the policyolder;</p></li>
-<li><p><code>EXPECTED_CLAIM_AGE0</code> is the expected claim for the policyholder at AGE0, computed as: <span class="math inline">\(exposure\ in\ year\ when\ he/she\ has\ AGE0 * ( \frac{qx.x} {1000})\)</span></p></li>
-<li><p><code>EXPECTED_CLAIM_AGE1</code> is the expected claim for the policyholder at AGE1, computed as: <span class="math inline">\(exposure\ in\ year\ when\ he/she\ has\ AGE1 * ( \frac{qx.y} {1000})\)</span></p></li>
+<li><p><code>qx.y</code> .y indicates the probability of dying between AGE1 and AGE1 + 1 for the policyholder;</p></li>
+<li><p><code>EXPECTED_CLAIM_AGE0</code> is the expected claim for the policyholder at AGE0, computed as: <span class="math inline">\(exposure\ in\ year\ when\ he/she\ has\ AGE\0 * ( \frac{qx.x} {1000})\)</span></p></li>
+<li><p><code>EXPECTED_CLAIM_AGE1</code> is the expected claim for the policyholder at AGE1, computed as: <span class="math inline">\(exposure\ in\ year\ when\ he/she\ has\ AGE\1 * ( \frac{qx.y} {1000})\)</span></p></li>
 </ul>
 </div>
 <div id="calculate_ibnr" class="section level2">
@@ -451,6 +478,15 @@
     .ibnrtable <span class="op">=</span> <span class="va">IBNR_factors_CQP</span>,
     .ibnrfactor <span class="op">=</span> <span class="va">IBNR_factor</span>, .cy <span class="op">=</span> <span class="va">CY</span>
     <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 27</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -474,7 +510,7 @@
 <p><small> <strong>NOTE</strong>: <em>to see the output of the function <code><a href="../reference/calculate_IBNR.html">calculate_IBNR()</a></code>, please use the arrow to slide the columns of the resulting dataset.</em> </small></p>
 <p>The resulting data frame has two new columns:</p>
 <ul>
-<li><p><code>IBNR_factor</code> indicates the IBNR factor of the corresponding current year:</p></li>
+<li><p><code>IBNR_factor</code> indicates the IBNR factor of the corresponding current year;</p></li>
 <li><p><code>CLAIMS_IBNR</code> shows the associated IBNR claim for each CY and policyholder (NOTE: if the current year in the original data frame is higher than the most recent current year in the IBNR table, this will produce an NA).</p></li>
 </ul>
 <p>Note that the function <code><a href="../reference/calculate_IBNR.html">calculate_IBNR()</a></code> is independent from the function <code><a href="../reference/compute_expectedclaim.html">compute_expectedclaim()</a></code>. It can be used right after the function <code><a href="../reference/optimize_exposure.html">optimize_exposure()</a></code> as following:</p>
@@ -490,6 +526,15 @@
     .ibnrtable <span class="op">=</span> <span class="va">IBNR_factors_CQP</span>,
     .ibnrfactor <span class="op">=</span> <span class="va">IBNR_factor</span>, .cy <span class="op">=</span> <span class="va">CY</span>
     <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 23</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -531,6 +576,15 @@
     .ibnrtable <span class="op">=</span> <span class="va">IBNR_factors_CQP</span>,
     .ibnrfactor <span class="op">=</span> <span class="va">IBNR_factor</span>, .cy <span class="op">=</span> <span class="va">CY</span>
     <span class="op">)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which main event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1046726, 1355512, 1807138, 2560830, 2759498, 3451651, 4017689,</span>
+<span class="co">#&gt; 4947699, 5141288, 5194342, 5461098, 6020022, 6518108, 7231957, 7263230, 7278494,</span>
+<span class="co">#&gt; 9169837, 9409256)</span>
+<span class="co">#&gt; Warning in optimize_exposure(., .polnr = Policy_id, .inceptiondate =</span>
+<span class="co">#&gt; Inception_date, : There are policies which sub event occurs in the waiting</span>
+<span class="co">#&gt; period: c(1425221, 2293556, 2713558, 3088353, 4809645, 5575964, 6504789,</span>
+<span class="co">#&gt; 6572333, 6793280, 7869755, 7950721, 9603585)</span>
 <span class="co">#&gt; # A tibble: 28,514 x 27</span>
 <span class="co">#&gt;    Policy_id Inception_date Term_date  Birth_date Gender    UY    CY</span>
 <span class="co">#&gt;        &lt;dbl&gt; &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
